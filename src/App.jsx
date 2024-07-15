@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Animal from './Animal';
+import Animal from './Animal.jsx';
 
 const App = () => {
   //   return React.createElement(
