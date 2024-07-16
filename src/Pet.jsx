@@ -4,8 +4,8 @@ const Pet = (props) => {
   return (
     <div>
       <h2>{props.name}</h2>
-      <h3>{props.species}</h3>
-      <h3>{props.color}</h3>
+      <h3 className='capitalize'>{props.animal}</h3>
+      <h3>{props.breed}</h3>
     </div>
   );
 };
