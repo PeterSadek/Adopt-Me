@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Pet from './Pet.jsx';
+import useBreedList from './useBreedList.js';
 
 const ANIMALS = ['Dog', 'Cat', 'Bird', 'Reptile', 'Rabbit'];
 
@@ -8,10 +9,10 @@ const Search = () => {
   const [animal, setAnimal] = useState('');
   const [breed, setBreed] = useState('');
   const [pets, setPets] = useState([]);
-  const breeds = [];
+  const [breeds, isLoading, error] = useBreedList(animal);
 
   useEffect(() => {
-    requestPets();
+    // requestPets();
   }, []);
 
   async function requestPets() {
@@ -28,7 +29,9 @@ const Search = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          requestPets();
+          if (animal) {
+            requestPets();
+          }
         }}
       >
         <label htmlFor='location'>
