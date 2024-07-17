@@ -15,6 +15,13 @@ function useBreedList(animal) {
     } else {
       requestBreedList();
     }
+
+    // if (animal) {
+    //   requestBreedList();
+    // } else {
+    //   setBreedList([]);
+    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animal]);
 
   async function requestBreedList() {
@@ -27,6 +34,8 @@ function useBreedList(animal) {
       const json = await res.json();
       localCache[animal] = json.breeds || [];
       setBreedList(localCache[animal]);
+
+      // setBreedList(json.breeds || []);
     } catch {
       (err) => setError(err);
     } finally {

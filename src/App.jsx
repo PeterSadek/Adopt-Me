@@ -1,14 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import Pet from './Pet.jsx';
-import Search from './Search.jsx';
+import Search from './components/Search';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import Details from './components/Details';
 
 const App = () => {
   return (
-    <div>
-      <h1>Adopt Me!</h1>
-      <Search />
-    </div>
+    <BrowserRouter>
+      <header>
+        <Link to='/'>Adopt Me!</Link>
+      </header>
+
+      <Routes>
+        <Route path='/' element={<Search />} />
+        <Route path='/details/:id' element={<Details />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

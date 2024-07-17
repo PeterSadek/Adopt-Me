@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import useBreedList from './useBreedList.js';
-import Results from './Results.jsx';
+import useBreedList from '../useBreedList';
+import Results from './Results';
 
 const ANIMALS = ['Dog', 'Cat', 'Bird', 'Reptile', 'Rabbit'];
 
@@ -12,7 +12,8 @@ const Search = () => {
   const [breeds, isLoading, error] = useBreedList(animal);
 
   useEffect(() => {
-    // requestPets();
+    requestPets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function requestPets() {
