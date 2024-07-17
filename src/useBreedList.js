@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-let localCache = {};
+const localCache = {};
 
 function useBreedList(animal) {
   const [breedList, setBreedList] = useState([]);
