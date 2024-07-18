@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useBreedList from '../useBreedList';
 import Results from './Results';
+import { useQuery } from '@tanstack/react-query';
+import fetchSearchData from '../apis/fetchSearchData';
 
 const ANIMALS = ['Dog', 'Cat', 'Bird', 'Reptile', 'Rabbit'];
 
@@ -8,28 +10,20 @@ const Search = () => {
   const [location, setLocation] = useState('');
   const [animal, setAnimal] = useState('');
   const [breed, setBreed] = useState('');
-  const [pets, setPets] = useState([]);
-  const [breeds, isLoading, error] = useBreedList(animal);
+  const [breeds] = useBreedList(animal);
 
-  useEffect(() => {
-    requestPets();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const result = useQuery(
+    ['data', { animal, location, breed }],
+    fetchSearchData
+  );
 
-  async function requestPets() {
-    const res = await fetch(
-      `https://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
-    );
-    const json = await res.json();
-    setPets(json.pets);
-  }
+  const pets = result?.data?.pets ?? [];
 
   return (
     <div className='search-params'>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          requestPets();
         }}
       >
         <label htmlFor='location'>
@@ -77,7 +71,7 @@ const Search = () => {
         <button>Submit</button>
       </form>
 
-      <Results pets={pets} isLoading={isLoading} error={error} />
+      <Results pets={pets} />
     </div>
   );
 };
