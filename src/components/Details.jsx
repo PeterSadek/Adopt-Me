@@ -1,13 +1,18 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import fetchPetDetails from '../apis/fetchPetDetails';
 import Carousel from './Carousel';
 import ErrorBoundary from './ErrorBoundary';
+import { useContext } from 'react';
+import AdoptedPetContext from '../AdoptedPetContext';
 
 const Details = () => {
   const { id } = useParams();
   const result = useQuery(['details', id], fetchPetDetails);
+  const [, setAdoptedPet] = useContext(AdoptedPetContext);
+
+  const navigate = useNavigate();
 
   if (result.isLoading)
     return (
@@ -28,7 +33,14 @@ const Details = () => {
           <span className='capitalize'>{pet.animal} </span>- {pet.breed} -{' '}
           {pet.city}, {pet.state}
         </h2>
-        <button>Adopt {pet.name}</button>
+        <button
+          onClick={() => {
+            navigate('/');
+            setAdoptedPet(pet);
+          }}
+        >
+          Adopt {pet.name}
+        </button>
         <p>{pet.description}</p>
       </div>
     </div>

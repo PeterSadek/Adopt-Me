@@ -375,3 +375,8 @@ form .pet {
 .capitalize {
   text-transform: capitalize;
 }
+
+.nameCenter {
+  text-align: center;
+  margin-top: 2px;
+}

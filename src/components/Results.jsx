@@ -6,7 +6,7 @@ const Results = ({ pets, isLoading }) => {
       {isLoading ? (
         <h2>Loading...</h2>
       ) : pets.length == 0 ? (
-        <h2>Select a pet</h2>
+        <h2>No pets found!</h2>
       ) : (
         pets.map((pet) => (
           <Pet
